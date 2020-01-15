@@ -15,7 +15,7 @@ from nltk.tokenize import word_tokenize
 from string import punctuation
 from nltk.corpus import stopwords
 from nltk.probability import FreqDist
-
+from nltk.stem import SnowballStemmer
 from wordcloud import WordCloud, STOPWORDS
 
 data=pd.read_csv("Put the path of your file which has Lenovo K8 data")
@@ -29,7 +29,7 @@ def clean_text(sent):
     list_stem=[stemmer_s.stem(word) for word in reviews_upated1]
     res=" ".join(list_stem)
     return(res)
-    
+stemmer_s=SnowballStemmer("english")
 data["Clean_review"]=data.review.apply(clean_text) # Adding the cleaned text as a column to the dataframe
 
 all_joinedterms=" ".join(data.Clean_review.values) #combining all the lines of newly created column and creating a single string
